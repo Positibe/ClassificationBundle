@@ -1,0 +1,13 @@
+services:
+    positibe_classification.tag_form_type:
+        class: Positibe\Bundle\ClassificationBundle\Form\Type\TagFormType
+        tags:
+            - { name: form.type, alias: positibe_tag }
+        calls:
+            - [ setTagRepository, [@positibe_classification.tag_repository]]
+
+    positibe_classification.tag_repository:
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        class: Doctrine\ORM\EntityRepository
+        arguments: [%positibe_classification.tag_class%]

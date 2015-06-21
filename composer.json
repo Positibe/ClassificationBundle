@@ -1,0 +1,37 @@
+{
+    "name": "positibe/classification-bundle",
+    "type": "symfony-bundle",
+    "description": "Symfony PositibeClassificationBundle",
+    "keywords": ["tags","classification", "taxonomy","category", "positibe", "positibelabs"],
+    "homepage": "http://positibelabs.blogspot.com/bundles/classification",
+    "license": "Private",
+    "version": "0.0.0.1",
+    "authors": [
+        {
+            "name": "Pedro Carlos Abreu Jiménez",
+            "email": "pcabreus@gmail.com",
+            "homepage": "http://pcabreus.blogspot.com"
+        },
+        {
+            "name": "PositibeLabs Cooperative",
+            "homepage": "https://github.com/positibelabs"
+        }
+    ],
+    "require": {
+        "symfony/symfony": "~2.3",
+        "genemu/form-bundle": "~2.2.0"
+    },
+    "suggest": {
+        "twig/twig": "Allows to use twig templates",
+        "doctrine/doctrine-bundle": "~1.2",
+        "doctrine/orm": "~2.2,>=2.2.3"
+    },
+    "autoload": {
+        "psr-4": { "Positibe\\Bundle\\ClassificationBundle\\": "" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.0.x-dev"
+        }
+    }
+}

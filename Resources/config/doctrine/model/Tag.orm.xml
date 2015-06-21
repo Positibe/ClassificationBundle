@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
+    <mapped-superclass name="Positibe\Bundle\ClassificationBundle\Model\Tag">
+        <field name="name" column="name" type="string" length="255"/>
+        <field name="slug" column="slug" type="string" unique="true">
+            <gedmo:slug fields="name" unique="true" />
+        </field>
+        <field name="createdAt" column="created_at" type="datetime">
+            <gedmo:timestampable on="create"/>
+        </field>
+        <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
+            <gedmo:timestampable on="update"/>
+        </field>
+        <field name="enabled" column="enabled"  type="boolean"/>
+    </mapped-superclass>
+</doctrine-mapping>

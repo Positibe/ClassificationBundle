@@ -1,0 +1,11 @@
+{% macro list_tags(tags, uri) %}
+    {% for tag in tags %}
+        {% set url = uri is not null ? path(uri, {'name': tag.name}) : '#' %}
+        <a href="{{ url }}">
+            {{ tag.name }}
+        </a>
+        {% if not loop.last %}
+            ,
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
