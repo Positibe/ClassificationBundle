@@ -172,16 +172,6 @@ abstract class Category implements CategoryInterface
     }
 
     /**
-     * @param CategoryInterface $child
-     *
-     * @deprecated only used by the AdminHelper
-     */
-    public function addChildren(CategoryInterface $child)
-    {
-        $this->addChild($child, true);
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function addChild(CategoryInterface $child, $nested = false)

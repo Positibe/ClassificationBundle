@@ -2,15 +2,12 @@
 
 namespace Positibe\Bundle\ClassificationBundle\Form\Type;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\EntityManager;
 use Positibe\Bundle\ClassificationBundle\Form\DataTransformer\TagsToStringTransformer;
 use Positibe\Bundle\ClassificationBundle\Form\DataMapper\ChosenAndCsvTagMapper;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\VarDumper\VarDumper;
 
 /**
  * Class TagFormType
@@ -21,52 +18,65 @@ use Symfony\Component\VarDumper\VarDumper;
 class TagFormType extends AbstractType
 {
     /**
-     * @var EntityRepository
+     * @var EntityManager
      */
-    private $tagRepository;
+    private $entityManager;
 
-    public function setTagRepository(EntityRepository $tagRepository)
+    public function setEntityManager(EntityManager $entityManager)
     {
-        $this->tagRepository = $tagRepository;
+        $this->entityManager = $entityManager;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $repository = $this->entityManager->getRepository($options['class_name']);
+        $className = $options['class_name'];
+
+
         $transformer = new TagsToStringTransformer(
-            $this->tagRepository, $this->tagRepository->getClassName(),
-            isset($options['repository_options']) ? $options['repository_options'] : array()
+          $repository,
+          $className,
+          isset($options['repository_options']) ? $options['repository_options'] : array()
         );
 
         $builder
-            ->add(
-                $builder->create(
-                    'csv',
-                    'text',
-                    array(
-                        'required' => false,
-                        'label' => 'Separate tags with commas',
-                        'translation_domain' => 'BlogBundle',
-                        'attr' => array(
-                            'class' => 'input-xlarge'
-                        )
-
-                    )
-                )->addModelTransformer($transformer)
-            )
-            ->setDataMapper(new ChosenAndCsvTagMapper());
-
-        //@todo Realizar una función en el repositorio para realizar solamente un conteo de tagsy optimzar la consulta
-        if (count($this->tagRepository->findAll()) > 0) {
-            $builder->add(
-                'tags',
-                'genemu_jquerychosen_entity',
-                array(
-                    'class' => $this->tagRepository->getClassName(),
-                    'multiple' => true,
-                    'attr' => array('class' => 'chosen-select form-control'),
-                    'required' => false,
-                    'label' => 'Choose from the most used tags'
+          ->add(
+            $builder->create(
+              'csv',
+              'text',
+              array(
+                'required' => false,
+                'label' => 'Separadas por comas',
+                'translation_domain' => 'BlogBundle',
+                'attr' => array(
+                  'class' => 'input-xlarge'
                 )
+
+              )
+            )->addModelTransformer($transformer)
+          )
+          ->setDataMapper(new ChosenAndCsvTagMapper());
+
+
+        $qb = $this->entityManager->createQueryBuilder();
+
+        $count = (Integer)$qb->from(
+          $options['class_name'],
+          'o'
+        )->select($qb->expr()->countDistinct('o.id'))->getQuery()->getResult()[0][1];
+
+        if ($count > 0) {
+            $builder->add(
+              'tags',
+              'entity',
+              array(
+                'class' => $className,
+                'multiple' => true,
+                'attr' => array('class' => 'chosen-select form-control'),
+                'required' => false,
+                'label' => 'Más usadas',
+                'empty_value' => '-- Seleccione una etiqueta --'
+              )
             );
         }
 
@@ -74,9 +84,18 @@ class TagFormType extends AbstractType
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-//        $resolver ->setAllowedTypes(array(
-//            'repository_options' => 'Array',
-//        ));
+        $resolver
+          ->setDefaults(
+            array(
+              'repository_options' => array(),
+              'class_name' => null
+            )
+          )
+          ->setAllowedTypes(
+            array(
+              'repository_options' => 'Array'
+            )
+          );
     }
 
 

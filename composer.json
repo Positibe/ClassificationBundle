@@ -5,7 +5,7 @@
     "keywords": ["tags","classification", "taxonomy","category", "positibe", "positibelabs"],
     "homepage": "http://positibelabs.blogspot.com/bundles/classification",
     "license": "Private",
-    "version": "0.0.0.1",
+    "version": "0.1.0.0",
     "authors": [
         {
             "name": "Pedro Carlos Abreu Jiménez",
@@ -19,7 +19,7 @@
     ],
     "require": {
         "symfony/symfony": "~2.3",
-        "genemu/form-bundle": "~2.2.0"
+        "gedmo/doctrine-extensions": "~2.3"
     },
     "suggest": {
         "twig/twig": "Allows to use twig templates",

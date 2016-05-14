@@ -20,7 +20,7 @@ abstract class Collection implements CollectionInterface
 
     protected $slug;
 
-    protected $enabled;
+    protected $enabled = true;
 
     protected $description;
 
@@ -79,7 +79,7 @@ abstract class Collection implements CollectionInterface
      */
     public function setSlug($slug)
     {
-        $this->slug = Tag::slugify($slug);
+        $this->slug = $slug;
     }
 
     /**
