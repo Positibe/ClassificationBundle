@@ -12,7 +12,7 @@
 namespace Positibe\Bundle\ClassificationBundle\Model;
 
 use Positibe\Bundle\ClassificationBundle\Model\Tag;
-use Sonata\MediaBundle\Model\MediaInterface;
+use Positibe\Bundle\OrmMediaBundle\Model\MediaInterface;
 
 abstract class Collection implements CollectionInterface
 {

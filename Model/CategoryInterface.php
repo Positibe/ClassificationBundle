@@ -11,7 +11,7 @@
 
 namespace Positibe\Bundle\ClassificationBundle\Model;
 
-use Sonata\MediaBundle\Model\MediaInterface;
+use Positibe\Bundle\OrmMediaBundle\Model\MediaInterface;
 
 interface CategoryInterface
 {

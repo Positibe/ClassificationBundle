@@ -14,7 +14,7 @@ namespace Positibe\Bundle\ClassificationBundle\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Positibe\Bundle\ClassificationBundle\Model\CategoryInterface;
 use Positibe\Bundle\ClassificationBundle\Model\Tag;
-use Sonata\MediaBundle\Model\MediaInterface;
+use Positibe\Bundle\OrmMediaBundle\Model\MediaInterface;
 
 abstract class Category implements CategoryInterface
 {
