@@ -1,25 +1,25 @@
 {
     "name": "positibe/classification-bundle",
     "type": "symfony-bundle",
-    "description": "Symfony PositibeClassificationBundle",
+    "description": "Symfony Positibe Classification Bundle",
     "keywords": ["tags","classification", "taxonomy","category", "positibe", "positibelabs"],
-    "homepage": "http://positibelabs.blogspot.com/bundles/classification",
+    "homepage": "http://www.positibelabs.com/bundles/classification",
     "license": "MIT",
-    "version": "0.2.1.0",
+    "version": "1.0.0-beta1",
     "authors": [
         {
             "name": "Pedro Carlos Abreu Jiménez",
             "email": "pcabreus@gmail.com",
-            "homepage": "http://pcabreus.blogspot.com"
+            "homepage": "https://github.com/pcabreus"
         },
         {
-            "name": "PositibeLabs Cooperative",
-            "homepage": "https://github.com/positibelabs"
+            "name": "PositibeLabs",
+            "homepage": "http://www.positibelabs.com"
         }
     ],
     "require": {
-        "symfony/framework-bundle": "~2.7",
-        "gedmo/doctrine-extensions": "~2.3"
+        "symfony/framework-bundle": "~2.8|~3.0",
+        "gedmo/doctrine-extensions": "~2.4"
     },
     "suggest": {
         "twig/twig": "Allows to use twig templates",
@@ -31,7 +31,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.2.x-dev"
+            "dev-master": "1.0.x-dev"
         }
     }
 }

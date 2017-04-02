@@ -1,4 +1,12 @@
 <?php
+/**
+ * This file is part of the PositibeLabs Projects.
+ *
+ * (c) Pedro Carlos Abreu <pcabreus@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Positibe\Bundle\ClassificationBundle\Form\Type;
 
@@ -6,8 +14,9 @@ use Doctrine\ORM\EntityManager;
 use Positibe\Bundle\ClassificationBundle\Form\DataTransformer\TagsToStringTransformer;
 use Positibe\Bundle\ClassificationBundle\Form\DataMapper\ChosenAndCsvTagMapper;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class TagFormType
@@ -29,82 +38,68 @@ class TagFormType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $repository = $this->entityManager->getRepository($options['class_name']);
         $className = $options['class_name'];
-
-
-        $transformer = new TagsToStringTransformer(
-          $repository,
-          $className,
-          isset($options['repository_options']) ? $options['repository_options'] : array()
-        );
+        $repository = $this->entityManager->getRepository($className);
 
         $builder
-          ->add(
-            $builder->create(
-              'csv',
-              'text',
-              array(
-                'required' => false,
-                'label' => 'Separadas por comas',
-                'translation_domain' => 'BlogBundle',
-                'attr' => array(
-                  'class' => 'input-xlarge'
+            ->add(
+                $builder->create(
+                    'csv',
+                    TextType::class,
+                    [
+                        'required' => false,
+                        'label' => 'tag.form.csv_label',
+
+                    ]
+                )->addModelTransformer(
+                    new TagsToStringTransformer(
+                        $repository,
+                        $className,
+                        isset($options['repository_options']) ? $options['repository_options'] : []
+                    )
                 )
-
-              )
-            )->addModelTransformer($transformer)
-          )
-          ->setDataMapper(new ChosenAndCsvTagMapper());
-
+            )
+            ->setDataMapper(new ChosenAndCsvTagMapper());
 
         $qb = $this->entityManager->createQueryBuilder();
 
-        $count = (Integer)$qb->from(
-          $options['class_name'],
-          'o'
-        )->select($qb->expr()->countDistinct('o.id'))->getQuery()->getResult()[0][1];
-
-        if ($count > 0) {
+        if ($count = (Integer)$qb->from($className, 'o')->select($qb->expr()->countDistinct('o.id'))->getQuery()
+            ->getResult()[0][1]) {
             $builder->add(
-              'tags',
-              'entity',
-              array(
-                'class' => $className,
-                'multiple' => true,
-                'attr' => array('class' => 'chosen-select form-control'),
-                'required' => false,
-                'label' => 'Más usadas',
-                'empty_value' => '-- Seleccione una etiqueta --'
-              )
+                'tags',
+                'entity',
+                [
+                    'class' => $className,
+                    'multiple' => true,
+                    'attr' => array('class' => 'chosen-select'),
+                    'required' => false,
+                    'label' => 'tag.form.tags_label',
+                ]
             );
         }
 
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-          ->setDefaults(
-            array(
-              'repository_options' => array(),
-              'class_name' => null
+            ->setDefaults(
+                array(
+                    'repository_options' => array(),
+                    'class_name' => null,
+                )
             )
-          )
-          ->setAllowedTypes(
-            array(
-              'repository_options' => 'Array'
-            )
-          );
+            ->setAllowedTypes(
+                array(
+                    'repository_options' => 'Array',
+                )
+            );
     }
 
-
     /**
-     * Returns the name of this type.
-     *
-     * @return string The name of this type
+     * @return string
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'positibe_tag';
     }

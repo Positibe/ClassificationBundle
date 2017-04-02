@@ -1,8 +1,15 @@
 <?php
+/**
+ * This file is part of the PositibeLabs Projects.
+ *
+ * (c) Pedro Carlos Abreu <pcabreus@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Positibe\Bundle\ClassificationBundle\Model;
 
-use Positibe\Bundle\ClassificationBundle\Model\Tag;
 use Positibe\Bundle\OrmMediaBundle\Model\MediaInterface;
 
 abstract class Collection implements CollectionInterface
@@ -22,15 +29,16 @@ abstract class Collection implements CollectionInterface
     protected $media;
 
     /**
-     * Set name
-     *
-     * @param string $name
+     * @param $name
+     * @return $this
      */
     public function setName($name)
     {
         $this->name = $name;
 
         $this->setSlug($name);
+
+        return $this;
     }
 
     /**
