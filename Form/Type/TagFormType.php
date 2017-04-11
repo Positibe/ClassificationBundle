@@ -85,13 +85,8 @@ class TagFormType extends AbstractType
         $resolver
             ->setDefaults(
                 array(
-                    'repository_options' => array(),
+                    'repository_options' => [],
                     'class_name' => null,
-                )
-            )
-            ->setAllowedTypes(
-                array(
-                    'repository_options' => 'Array',
                 )
             );
     }

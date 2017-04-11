@@ -1,0 +1,4 @@
+tag:
+    form:
+        tags_label: Añadir etiquetas
+        csv_label: Nuevas etiquetas
