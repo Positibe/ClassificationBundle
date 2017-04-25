@@ -10,10 +10,12 @@
 
 namespace Positibe\Bundle\ClassificationBundle\Model;
 
-use Positibe\Bundle\OrmMediaBundle\Model\MediaInterface;
+use Positibe\Bundle\MediaBundle\Model\MediaInterface;
 
 interface CategoryInterface
 {
+    public function getId();
+
     /**
      * @param $name
      *

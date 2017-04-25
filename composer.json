@@ -5,7 +5,7 @@
     "keywords": ["tags","classification", "taxonomy","category", "positibe", "positibelabs"],
     "homepage": "http://www.positibelabs.com/bundles/classification",
     "license": "MIT",
-    "version": "1.0.0-RC1",
+    "version": "1.0.0-RC3",
     "authors": [
         {
             "name": "Pedro Carlos Abreu Jiménez",

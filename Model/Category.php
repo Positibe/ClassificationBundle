@@ -11,7 +11,7 @@
 namespace Positibe\Bundle\ClassificationBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Positibe\Bundle\OrmMediaBundle\Model\MediaInterface;
+use Positibe\Bundle\MediaBundle\Model\MediaInterface;
 
 abstract class Category implements CategoryInterface
 {
@@ -74,7 +74,7 @@ abstract class Category implements CategoryInterface
      */
     public function setSlug($slug)
     {
-        $this->slug = Tag::slugify($slug);
+        $this->slug = $slug;
     }
 
     /**
