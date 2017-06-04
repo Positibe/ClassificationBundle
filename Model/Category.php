@@ -19,7 +19,7 @@ abstract class Category implements CategoryInterface
 
     protected $slug;
 
-    protected $enabled;
+    protected $enabled = true;
 
     protected $description;
 
