@@ -10,9 +10,12 @@
 
 namespace Positibe\Bundle\ClassificationBundle\Model;
 
+use Pcabreus\Utils\Entity\SluggableByNameInterface;
+use Pcabreus\Utils\Entity\TimestampableInterface;
+use Pcabreus\Utils\Entity\ToggleableInterface;
 use Positibe\Bundle\MediaBundle\Model\MediaInterface;
 
-interface CollectionInterface
+interface CollectionInterface extends SluggableByNameInterface, ToggleableInterface, TimestampableInterface
 {
     /**
      * @param $name

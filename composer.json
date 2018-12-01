@@ -2,10 +2,10 @@
     "name": "positibe/classification-bundle",
     "type": "symfony-bundle",
     "description": "Symfony Positibe Classification Bundle",
-    "keywords": ["tags","classification", "taxonomy","category", "positibe", "positibelabs"],
+    "keywords": ["tags","classification", "tags","category", "positibe", "positibelabs"],
     "homepage": "http://www.positibelabs.com/bundles/classification",
     "license": "MIT",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "authors": [
         {
             "name": "Pedro Carlos Abreu Jiménez",
@@ -18,7 +18,7 @@
         }
     ],
     "require": {
-        "symfony/framework-bundle": "~2.8|~3.0",
+        "symfony/framework-bundle": "^2.8 || ^3.0 || ^4.0",
         "gedmo/doctrine-extensions": "~2.4"
     },
     "suggest": {
@@ -31,7 +31,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0.x-dev"
+            "dev-master": "1.1.x-dev"
         }
     }
 }

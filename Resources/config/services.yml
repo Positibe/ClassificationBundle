@@ -1,10 +1,7 @@
 services:
-    positibe_classification.tag_form_type:
-        class: Positibe\Bundle\ClassificationBundle\Form\Type\TagFormType
-        tags:
-            - { name: form.type }
-        calls:
-            - [ setEntityManager, ["@doctrine.orm.entity_manager"]]
+    Positibe\Bundle\ClassificationBundle\Form\Type\TagFormType:
+        autowire: true
+        autoconfigure: true
 
 #    positibe_classification.tag_repository:
 #        factory_service: doctrine.orm.default_entity_manager
