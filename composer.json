@@ -19,7 +19,8 @@
     ],
     "require": {
         "symfony/framework-bundle": "^2.8 || ^3.0 || ^4.0",
-        "gedmo/doctrine-extensions": "~2.4"
+        "gedmo/doctrine-extensions": "~2.4",
+        "pcabreus-utils/entity-traits": "^1.2"
     },
     "suggest": {
         "twig/twig": "Allows to use twig templates",
