@@ -1,0 +1,10 @@
+services:
+    Positibe\Bundle\ClassificationBundle\Form\Type\TagFormType:
+        autowire: true
+        autoconfigure: true
+
+#    positibe_classification.tag_repository:
+#        factory_service: doctrine.orm.default_entity_manager
+#        factory_method: getRepository
+#        class: Doctrine\ORM\EntityRepository
+#        arguments: [%positibe_classification.tag_class%]
